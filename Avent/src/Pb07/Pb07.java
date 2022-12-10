@@ -68,11 +68,9 @@ public class Pb07
 		}
 
 		for(String s : arborescence.keySet()) rep.add(s);
-		int i = 0;
 		for(String s : rep) arborescenceTotale.put(s, arborescence.get(s));
 		for(String s : rep) 
 		{
-			i++;
 			int n = s.lastIndexOf("/");
 			if (n > 0)
 			{	
@@ -107,7 +105,6 @@ public class Pb07
 		int man = nec -res;
 		System.out.println("manquants : " + man);
 		
-		int min = tot;
 		for(String s : rep)
 		{
 //			System.out.println(s + " ---> " + arborescenceTotale.get(s));

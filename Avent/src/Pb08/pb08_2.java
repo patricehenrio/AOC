@@ -52,7 +52,7 @@ public class pb08_2
 		
 		char c = arbre(i,j);
 		
-		char c1, c2;
+		char c1;
 		int k;
 		int haut = 0, bas = 0, gauche = 0, droite = 0;
 
