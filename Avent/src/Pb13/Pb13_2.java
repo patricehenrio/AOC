@@ -1,62 +1,53 @@
 package Pb13;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.TreeSet;
 
 import fichiers.Fichiers;
 
-public class Pb13_1 
+public class Pb13_2 
 {
 	public static void main(String[] args) throws IOException 
 	{
 		//les données
 		String donnees = Fichiers.chargerContenuTexte("F:\\AOC\\calendrier avent\\pb 13.txt");
-		List<Paire> lesPaires = new ArrayList<Paire>();
-		for(String s : donnees.split("\n\n")) 
-		{
-			lesPaires.add(new Paire(s));
-		}
 		
-		int total = 0;
-		for(int i = 0; i < lesPaires.size(); i++)
+		TreeSet<Paquet> lesPaquets = new TreeSet<Paquet>();
+		Paquet p1 = new Paquet("[[2]]");
+		Paquet p2 = new Paquet("[[6]]");
+		lesPaquets.add(p2);
+		lesPaquets.add(p1);
+		for(String s : donnees.split("\n"))
 		{
-			Paire paire = lesPaires.get(i);
-			if (paire.isBonOrdre()) total += (i+1);
+			if (s.isEmpty()) continue;
+			lesPaquets.add(new Paquet(s));
 		}
-		System.out.println(total);
+		int n = 0;
+		int solution = 1;
+		for(Paquet p : lesPaquets) 
+		{
+			n++;
+			if (p.equals(p1))
+			{
+				solution = n;
+				continue;
+			}
+			if (p.equals(p2))
+			{
+				solution = solution * n;
+				break;
+			}
+		}
+		System.out.println(solution);
 	}
-
-	static class Paire
-	{
-		Paquet left, right;
-		boolean bonOrdre = true;
-		
-		public Paire(String s) 
-		{
-			String[] paire = s.split("\n");
-			left = new Paquet(paire[0]);
-			right = new Paquet(paire[1]);
-			bonOrdre = (left.compareTo(right) < 0); 
-		}
-
-		public boolean isBonOrdre() 
-		{
-			return bonOrdre;
-		}
-		
-		public String toString()
-		{
-			return left + "\n" + right;
-		}
-	}
-	
 	static class Paquet implements Comparable<Paquet>
 	{
 		String debut = "", suite = "";
+		String paquet;
 		
 		public Paquet(String s) 
 		{
+			paquet = s;
 			if (s.equals("[]")) return;
 			if (s.isEmpty()) return;
 			if (s.startsWith("[")) s = s.substring(1, s.length()-1);
@@ -113,6 +104,9 @@ public class Pb13_1
 		@Override
 		public int compareTo(Paquet paquet) 
 		{
+//			if (this.equals(P)) System.out.println(paquet);
+			
+			
 			if (this.equals(paquet)) return 0;
 			
 			String gauche = debut;
