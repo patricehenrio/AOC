@@ -58,6 +58,17 @@ public class Pb12_2 {
 			}
 		}
 
+		String s = "";
+		for(int ligne = 0; ligne < nombreLignes; ligne++)
+		{
+			s+='\n';
+			for(int colonne = 0; colonne < nombreColonnes; colonne++)
+			{
+				char c = carte[ligne][colonne];
+				s+= c=='|' ? '#' : c;
+			}
+		}
+		System.out.println(s);
 		System.out.println("Le chemin le plus court permet d'atteindre l'arrivée en " + cout + " étapes.");
 	}
 
@@ -79,13 +90,28 @@ public class Pb12_2 {
         }
         //le point de départ
         chemins[depart.x][depart.y].setChemin(new ArrayList<Point>());
+        int lig = -1, col = -1;
         //tant que chaque colline n'a pas un cout calculé
         //le cout calculé est le nombre minimum de cases à partir du départ pour y accéder 
         while (collinesNonVisitees.size() > 0) 
         {
          	//la colline non visitée la plus proche du départ
 			 Point colline = collineAMoindreCout();
-			 if (colline == null) return Integer.MAX_VALUE;
+			 if (colline == null) 
+			{
+				 if (lig < 0) 
+				 {
+					 carte[depart.x][depart.y] = '|';
+					 return Integer.MAX_VALUE;
+				 }
+				 List<Point> chemin = chemins[lig][col].getChemin();
+				 for(Point P : chemin)
+				 {
+					 //'|' = 'z' + 2, donc c'est une case inacessible
+					 carte[P.x][P.y]='|';
+				 }
+				 return Integer.MAX_VALUE;
+			}
 //			 if (depart.equals(new Point(0,9))) System.out.println("colline : " + colline);
 			 //le chemin le plus court pour y accéder
 			 List<Point> chemin = chemins[colline.x][colline.y].getChemin();
@@ -101,8 +127,8 @@ public class Pb12_2 {
 			 {
 				 if (!collinesNonVisitees.contains(voisine)) continue;
 				 
-				 int lig = voisine.x;
-				 int col = voisine.y;
+				 lig = voisine.x;
+				 col = voisine.y;
 				 
 				 if (cout < chemins[lig][col].getCout())
 				 {
