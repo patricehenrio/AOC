@@ -28,14 +28,10 @@ public class Pb09_2
 		{
 			corde[i] = new Point(xDepart,yDepart);
 		}
-//		for(int i = 0; i < 10; i++)System.out.println(corde[i]);
-//		afficherCorde();
-//		afficher();
 		
 		for(String s : mouvements)
 		{
 			traiter(s);
-//			afficher();
 		}
 		
 		if (deplacements[yDepart][xDepart] == 0) deplacements[yDepart][xDepart] = 's';
@@ -46,45 +42,6 @@ public class Pb09_2
 				if (deplacements[i][j] != 0) resultat ++;
 
 		System.out.println(resultat);
-		
-	}
-
-	private static void afficher() 
-	{
-//		System.out.println(xDepart, yDepart)
-//		afficherCorde();
-//		vider();
-//		for(int k = 9; k >= 0; k--)
-//		{
-//			Point P = corde[k];
-//			deplacements[P.y][P.x]= "0123456789".charAt(k);
-//		}
-		Point P = corde[9];
-//		deplacements[P.y][P.x]= '#';
-//		if (deplacements[yDepart][xDepart] == 0) deplacements[yDepart][xDepart] = 's';
-		deplacements[yDepart][xDepart] = 's';
-		
-		String str = "";
-		for(int ligne = nbLignes-1; ligne >= 0; ligne--)
-		{
-			for(int colonne = 0; colonne < nbColonnes; colonne++)
-			{
-				if (deplacements[ligne][colonne] == 0) str += '.';
-				else
-				{
-//					if (deplacements[ligne][colonne] == '0') str += 'H';
-//					else str += deplacements[ligne][colonne];
-					str += deplacements[ligne][colonne];
-				}
-				
-//				System.out.println(str);
-			}
-			str += "\n";
-		}
-//		if (deplacements[yDepart][xDepart] == 0) deplacements[yDepart][xDepart] = 's';
-
-
-		System.out.println(str);
 		
 	}
 
@@ -116,10 +73,8 @@ public class Pb09_2
 					System.out.println("erreur sur cette ligne : " + s);
 			}
 			corde[0] = H;
-//			for(int i = 0; i < 10; i++)System.out.println(corde[i]);
 
 			deplacerCorde();
-//			afficher();
 			n--;
 		}
 		
@@ -127,23 +82,12 @@ public class Pb09_2
 
 	private static void deplacerCorde() 
 	{
-//		vider();
 		for(int i = 1; i < 10; i++) 
 			deplacerNoeud(i);
-//		afficherCorde();
-	}
-
-	private static void vider() 
-	{
-		for (int i = 0; i < nbLignes; i++)
-			for(int j = 0; j < nbColonnes; j++)
-				deplacements[i][j] = 0;;
-		
 	}
 
 	private static void deplacerNoeud(int i) 
 	{
-//		afficherCorde();
 		Point H = corde[i-1];
 		Point T = corde[i];
 		if (T.x == H.x)//même colonne
@@ -287,16 +231,5 @@ public class Pb09_2
 			throw new RuntimeException("Erreur de déplacement " + H + T);	
 		}
 		throw new RuntimeException("Erreur de déplacement");
-	}
-
-	private static void afficherCorde() 
-	{
-		String s = "";
-		for(int i = 0; i < 10; i++)
-		{
-			Point P = corde[i];
-			s += " - " + i + " (" + P.x + "," + P.y + ")";
-		}
-		System.out.println(s.substring(3));
 	}
 }

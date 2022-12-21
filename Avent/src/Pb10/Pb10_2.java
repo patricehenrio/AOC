@@ -28,16 +28,6 @@ public class Pb10_2
 		String donnees = Fichiers.chargerContenuTexte(fichier);
 		String[] instructions = donnees.split("\n");
 
-//		for(String s : instructions)
-//		{
-//			if (s.startsWith("add"))
-//			{
-//				X += Integer.parseInt(s.substring(5));
-//				System.out.println(X);
-//			}
-//		}
-//		System.exit(0);
-		
 		afficherSpritePosition();
 
 		for(String s : instructions)
@@ -60,11 +50,6 @@ public class Pb10_2
 	{
 		if (s.startsWith("addx")) traiterAddx(s);
 		else traiterNoop(s);
-//		afficherTexte(true, s);
-//		if (s.equals("noop")) return;
-//		X += Integer.parseInt(s.substring(5));		
-//		tick++;
-//		afficherTexte(false, s);
 	}
 
 	private static void traiterNoop(String s) 
@@ -145,76 +130,6 @@ public class Pb10_2
 		else if (X == 0) ecran = "###" + ".".repeat(237);
 		else ecran = ".".repeat(X-1) + "###" + ".".repeat(238-X);
 		afficherSpritePosition();
-	}
-
-	private static void afficherTexte(boolean b, String s) 
-	{
-//		System.out.println(tick);
-		String during = "During cycle";
-		while(during.length() < 15-(""+cycle).length()) during += " ";
-		during += cycle + ":" + " CRT draws pixel in position " + position;
-		position++;
-
-		String sp = spritePosition.substring(17);
-		if (position == 11)
-		{
-			System.out.println("TEST");
-			System.out.println(sp);
-			System.out.println(cycle % 40);
-			System.out.println(sp.charAt(cycle % 40));
-			System.exit(0);
-		}
-		
-		//b vrai début du cycle
-		if (b)
-		{
-			String start = "Start cycle";
-			while(start.length() < 15 - (""+cycle).length()) start= start+ " ";
-			start += cycle + ":" + " begin executing " + s;
-			row += sp.charAt(cycle % 40);
-			String current = "Current CRT row: " + row;
-			
-			String endCycle = "End od cycle";
-			while(endCycle.length() < 15-(""+cycle).length()) endCycle += " ";
-			endCycle += cycle + ":" + " finish Executing " + s;
-			if (! s.equals("noop"))
-			{
-				endCycle += " (Register X is now " + X + ")";
-			}
-			
-			
-			System.out.println(start);
-			System.out.println(during);
-			System.out.println(current);
-			System.out.println("");
-			return;
-		}
-		
-		//b faux, fin du cycle
-		row += sp.charAt(cycle % 40);
-		String current = "Current CRT row: " + row;
-		
-		String endCycle = "End od cycle";
-		while(endCycle.length() < 15-(""+cycle).length()) endCycle = endCycle+ " ";
-		endCycle= endCycle + cycle + ":" + " finish Executing " + s + " (Register X is now " + X + ")";
-		
-		spritePosition = "";
-		while(spritePosition.length() < X-1) spritePosition += ".";
-		spritePosition += "###";
-		while(spritePosition.length() < 40) spritePosition += ".";
-		spritePosition = "Sprite position: " + spritePosition + "\n";
-				
-		System.out.println(during);
-		System.out.println(current);
-		System.out.println(endCycle);
-		System.out.println(spritePosition);
-	}
-
-	private static void arret() 
-	{
-		if (cycle > 21) System.exit(0);
-		// TODO Auto-generated method stub
-		
 	}
 	
 

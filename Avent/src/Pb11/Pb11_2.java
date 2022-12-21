@@ -31,11 +31,6 @@ public class Pb11_2
 	public static void main(String[] args) throws IOException 
 	{
 		String fichier = repertoire + "pb 11.txt";
-//		//test
-//		fichier = repertoire + "pb 11 test.txt";
-//		nbSinges = 4; 
-//		N = 13*17*19*23;
-//		test = true;
 		
 		String donnees = Fichiers.chargerContenuTexte(fichier);
 		String[] notes = donnees.split("\n\n");
@@ -57,26 +52,16 @@ public class Pb11_2
 			traiter5();
 			traiter6();
 			traiter7();
-//			afficherSinges();
 			if (round  == 1) afficherSinges
 			();
 			if (round == 20) afficherSinges();
 			if (round % 1000 == 0) afficherSinges();
-			
-			
-//			for(int n = 0; n < nbSinges; n++)
-//			{
-//				traiter(singes[n]);
-//			}
-//			afficherSinges();
-//			if (round % 1000 == 0) afficherSinges();
 		}
 		
 		long max1 = 1, max2 = 0;
 		for(int i = 0; i < nbSinges; i++)
 		{
 			long n = singes[i].getTotalInspection();
-//			System.out.println("Singe " + i + "\t" + n);
 			if (n > max1)
 			{
 				max2 = max1;
@@ -221,8 +206,6 @@ public class Pb11_2
 				else singes[1].ajouteWorryLevel(wl);
 			}
 			singe.videWorryLevel();
-//			System.out.println("traiter3)");
-//			afficherWorryLevel();
 			return;
 		}
 		else
@@ -271,8 +254,6 @@ public class Pb11_2
 				else singes[3].ajouteWorryLevel(wl);
 			}
 			singe.videWorryLevel();
-//			System.out.println("traiter2)");
-//			afficherWorryLevel();
 			return;
 		}
 		else
@@ -321,8 +302,6 @@ public class Pb11_2
 				else singes[0].ajouteWorryLevel(wl);
 			}
 			singe.videWorryLevel();
-//			System.out.println("traiter1)");
-//			afficherWorryLevel();
 			return;
 		}
 		else
@@ -371,9 +350,6 @@ public class Pb11_2
 				else singes[3].ajouteWorryLevel(wl);
 			}
 			singe.videWorryLevel();
-//			System.out.println("traiter0)");
-//			afficherWorryLevel();
-//			return;
 		}
 		else
 		{
@@ -399,20 +375,6 @@ public class Pb11_2
 		}
 	}
 
-	private static void afficherWorryLevel() 
-	{
-		System.out.println("After round " + round);
-		for(int i = 0; i < nbSinges; i++)
-		{
-			List<Long> wl = singes[i].getWorryLevel();
-			String s = "";
-			for(long n : wl) s += n + ", ";
-			System.out.println("Singe " + i + ": " + s);
-		}
-		System.out.println("");
-		
-	}
-
 	private static void afficherSinges() 
 	{
 		System.out.println("== After round " + round + " ==");
@@ -422,67 +384,6 @@ public class Pb11_2
 			System.out.println("Singe " + i + "\t" + n);
 		}
 		System.out.println("");
-	}
-
-	private static void traiter(Singe singe) 
-	{
-		for(int i = 0; i < singe.getWorryLevel().size(); i++)
-		{
-			singe.incrementeTotalInspection();
-			long wl = singe.getWorryLevel().get(i);
-			int[] dest = singe.getDestinataires();
-			String operation = singe.getOperation();
-			long modulo = -1;
-			switch(operation)
-			{
-				case "* 13" :
-					wl = 13L * wl;
-					wl = wl % singe.getDivisible();
-					break;
-				case "+ 2" :
-					wl = wl + 2L;
-					wl = wl % singe.getDivisible();
-					break;
-				case "+ 8" :
-					wl = wl + 8L;
-					wl = wl % singe.getDivisible();
-					break;
-				case "+ 1" :
-					wl = wl + 1L;
-					wl = wl % singe.getDivisible();
-					break;
-				case "* 17" : 
-					wl = wl + 17L;
-					wl = wl % singe.getDivisible();
-					break;
-				case "+ 3" :
-					wl = wl + 3L;
-					wl = wl % singe.getDivisible();
-					break;
-				case "* old" : //le cas du carré, le résultat est modulo 11
-					wl = wl * wl;
-					modulo = wl % 11L;
-					modulo = modulo*modulo;
-					break;
-				case "+ 6" :
-					wl = wl + 6L;
-					wl = wl % singe.getDivisible();
-					break;
-				case "* 19" :
-					wl = 19L * wl;
-					wl = wl % singe.getDivisible();
-					break;
-				default :
-					 throw new RuntimeException("Cas non, traité " + operation);
-			}
-			wl = wl % N;
-			if ((modulo) == 0) 
-				singes[dest[0]].ajouteWorryLevel(wl);
-			else
-				singes[dest[1]].ajouteWorryLevel(wl);
-			
-		}
-		singe.videWorryLevel();
 	}
 
 	/**
@@ -617,106 +518,12 @@ public class Pb11_2
 		
 	}
 	
-	private static String carre(String s) 
-	{
-		return multiplie(s,s);
-	}
-
-//	/**
-//	 * N peut être un nombre très grand
-//	 * @param string
-//	 * @param l
-//	 * @return
-//	 */
-//	private static int modulo(String string, long l) 
-//	{
-//		if (string < 10000) return (int) (string % l);
-//		else return modulo(""  + string, l);
-//		String s = ;
-//		int n = 10000 % D;
-//		
-//		//wl = (tous les chiffre sde wl sauf les 5 derniers) * 10000 + les 5 derniers;
-//		; 
-//		
-//		
-////		String s = "" + worryLevel;
-//		
-//		long x = (long) Math.sqrt(worryLevel);
-//		int r = modulo(x,D);
-//		long n = worryLevel - x*x;
-//		return modulo(r*r + n, D); 
-//	}
-
-//	private static int modulo(String s, int div) 
-//	{
-//		String nombre = s;
-//		int dixModuloDiv = 10 % div, resultat = 0;
-//
-//		for (char c : nombre.toCharArray())
-//		{
-//			resultat = (dixModuloDiv * resultat + c - 48) % div;
-//		}
-//		return resultat;
-		
-//		if (s.length() <= 5) return Integer.parseInt(s) % d;
-//		
-//		int n = s.length()/2;
-//		
-//		
-//		System.out.println("grand nombre : " + s);
-//		System.out.println("10000 : " + 10000 % d);
-//		System.out.println(s.substring(0, s.length() - 5));
-//		System.out.println("5 derniers chiffres : " + s.substring(s.length() - 5));
-//		
-//		return (10000 % d) * modulo(s.substring(0, s.length() - 5), d) + (Integer.parseInt(s.substring(s.length()-5)) % d);
-//	}
-
-	private static void test() 
-	{
-		System.out.println(N);
-		System.out.println(2*3*5*7*11*13*17*19);
-		System.out.println(2*3*17*19);
-		System.out.println(5*7*11*13);
-		System.out.println(multiplie("1938", "5005"));
-		
-//		long a = 52166;
-//		long b = 52013;
-//		System.out.println(a*b);
-//		String s = "1712354689741254785124595879132004667965316544487499999";
-//		String s = "1243";
-//		System.out.println(s);
-//		System.out.println(multiplie(s, "19"));
-//		System.out.println(19*1243);
-//		System.out.println(ajoute("9944", "1243"));
-//		while (s.length() > 5)
-//		{
-//			
-//			int a = Integer.parseInt(s.substring(0,5));
-//			
-//			int n = a % 17;
-//			s = s.substring(5);
-//			if (n != 0) s = n + s;
-//			System.out.println(s);
-//		}
-//		
-//		System.out.println(Integer.parseInt(s) % 17);
-//		long n = modulo("1712354689741254785124595879132004667965316544487454341", 17);
-//		
-//		
-//		System.out.println("grand nombre : " + n);
-//		while(n > 17)
-//		{
-//			n = modulo(""+n, 17);
-//			System.out.println("boucle : " + n);
-//		}
-		System.exit(0);
-	}
 	
+
 	static class Singe
 	{
 		int numero;
 		List<Long> worryLevel = new ArrayList<Long>();
-//		List<Long> worryLevel = new ArrayList<Long>();
 		long divisible;
 		int[] destinataires = new int[2];
 		long totalInspection = 0;
@@ -747,15 +554,9 @@ public class Pb11_2
 			destinataires[1] = Integer.parseInt(donnees[5].substring(30));
 		}
 
-		public void retire(long wl) {
-			// TODO Auto-generated method stub
-			
-		}
-
 		public void incrementeTotalInspection() 
 		{
 			totalInspection++;
-			
 		}
 
 		public void videWorryLevel() 
