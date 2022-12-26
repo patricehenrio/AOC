@@ -156,7 +156,6 @@ public class Pb14_1
 		for(int i = 0; i < hauteur; i++)
 			s += "\n" + i + "\t" + new String(caracteres[i]);
 		return s;
-		
 	}
 
 	static class Chemin

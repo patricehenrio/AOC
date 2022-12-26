@@ -2,81 +2,30 @@ package Pb02;
 
 import java.io.IOException;
 
-import debug.Messages;
-import fichiers.Fichiers;
+import AOC.AOC;
 
-public class Pb02 
+public class Pb02 extends AOC 
 {
-	static String repertoire = "F:\\AOC\\calendrier avent\\";
-	
+	private static String[] lignes;
+
 	public static void main(String[] args) throws IOException 
 	{
-		String fichier = repertoire + "pb 02.txt";
-		String donnees = Fichiers.chargerContenuTexte(fichier);
-		String[] lignes = donnees.split("\n");
+		String donnees = chargerDonnees("pb 02.txt");
+		lignes = donnees.split("\n");
+		
+		//première partie
+		System.out.println(partie_1());
+
+		//Deuxième partie
+		System.out.println(partie_2());
+	}
+
+	/**
+	 * Deuxième partie
+	 */
+	private static int partie_2() 
+	{
 		int total = 0;
-		/**
-		première partie
-		for(String ligne : lignes)
-		{
-			char a = ligne.charCt(0);
-			char x = ligne.charCt(2);
-			switch(a)
-			{
-				case 'C' :
-					switch(x)
-					{
-						case 'X' :
-							total += 4;
-							break;
-						case 'Y' :
-							total += 8;
-							break;
-						case 'Z' :
-							total += 3;
-							break;
-						default : Messages.messageErreur("erreur sur le deuxième lettre", a + " " + x);
-					}
-					break;
-				case 'B' :
-					switch(x)
-					{
-						case 'X' :
-							total += 1;
-							break;
-						case 'Y' :
-							total += 5;
-							break;
-						case 'Z' :
-							total += 9;
-							break;
-						default : Messages.messageErreur("erreur sur le deuxième lettre", a + " " + x);
-					}
-					break;
-				case 'C' :
-					switch(x)
-					{
-						case 'X' :
-							total += 7;
-							break;
-						case 'Y' :
-							total += 2;
-							break;
-						case 'Z' :
-							total += 6;
-							break;
-						default : Messages.messageErreur("erreur sur le deuxième lettre", a + " " + x);
-					}
-					break;
-				default : Messages.messageErreur("erreur sur le première lettre", a + " " + x);
-			}
-			
-			System.out.println(a + " " + x);
-		}
-		 */
-		/**
-		 * Deuxième partie
-		 */
 		for(String ligne : lignes)
 		{
 			switch(ligne)
@@ -99,11 +48,74 @@ public class Pb02
 					break;
 				case "C Z" : total += 7;
 					break;
-				default : Messages.messageErreur("erreur ", ligne);
+				default : throw new RuntimeException("erreur " + ligne);
 			}
 		}
 		
-		System.out.println(total);
+		return total;
 	}
 
+	/**
+	 * Première partie
+	 */
+	private static int partie_1() 
+	{
+		int total = 0;
+
+		for(String ligne : lignes)
+		{
+			char a = ligne.charAt(0);
+			char x = ligne.charAt(2);
+			switch(a)
+			{
+				case 'A' :
+					switch(x)
+					{
+						case 'X' :
+							total += 4;
+							break;
+						case 'Y' :
+							total += 8;
+							break;
+						case 'Z' :
+							total += 3;
+							break;
+						default : throw new RuntimeException("erreur sur le deuxième lettre : " + a + " " + x);	
+					}
+					break;
+				case 'B' :
+					switch(x)
+					{
+						case 'X' :
+							total += 1;
+							break;
+						case 'Y' :
+							total += 5;
+							break;
+						case 'Z' :
+							total += 9;
+							break;
+						default : throw new RuntimeException("erreur sur le deuxième lettre : " + a + " " + x);	
+					}
+					break;
+				case 'C' :
+					switch(x)
+					{
+						case 'X' :
+							total += 7;
+							break;
+						case 'Y' :
+							total += 2;
+							break;
+						case 'Z' :
+							total += 6;
+							break;
+						default : throw new RuntimeException("erreur sur le deuxième lettre : " + a + " " + x);	
+					}
+					break;
+				default : throw new RuntimeException("erreur sur le deuxième lettre : " + a + " " + x);	
+			}
+		}
+		return total;
+	}
 }

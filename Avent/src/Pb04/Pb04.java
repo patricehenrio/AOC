@@ -2,35 +2,27 @@ package Pb04;
 
 import java.io.IOException;
 
+import AOC.AOC;
 import chaines.Chaines;
-import fichiers.Fichiers;
 
-public class Pb04 
+public class Pb04 extends AOC
 {
-	static String repertoire = "F:\\AOC\\calendrier avent\\";
+	private static String[] lignes;
 
 	public static void main(String[] args) throws IOException 
 	{
-		String fichier = repertoire + "pb 04.txt";
-		String donnees = Fichiers.chargerContenuTexte(fichier);
-		String[] lignes = donnees.split("\n");
-		//première partie
-//		int NbLigne = 0;
-//		for(String ligne : lignes)
-//		{
-//			String s1 = Chaines.avantMarqueur(ligne, ",");
-//			String s2 = Chaines.apresMarqueur(ligne, ",");
-//			Intervalle I1 = new Intervalle(s1);
-//			Intervalle I2 = new Intervalle(s2);
-//			if (I1.contient(I2) || I2.contient(I1)) 
-//			{
-//				System.out.println(ligne);
-//				NbLigne++;
-//			}
-//		}
-//		System.out.println(NbLigne);
+		String donnees = chargerDonnees("pb 04.txt");
+		lignes = donnees.split("\n");
 		
-		//deuxième partie
+		//première partie
+		System.out.println(partie_1());
+
+		//Deuxième partie
+		System.out.println(partie_2());
+	}
+	
+	private static int partie_2() 
+	{
 		int NbLigne = 0;
 		for(String ligne : lignes)
 		{
@@ -40,14 +32,29 @@ public class Pb04
 			Intervalle I2 = new Intervalle(s2);
 			if (I1.chevauche(I2) || I2.chevauche(I1)) 
 			{
-				System.out.println(ligne);
 				NbLigne++;
 			}
 		}
-		System.out.println(NbLigne);
-
+		return NbLigne;
 	}
-	
+
+	private static int partie_1() 
+	{
+		int NbLigne = 0;
+		for(String ligne : lignes)
+		{
+			String s1 = Chaines.avantMarqueur(ligne, ",");
+			String s2 = Chaines.apresMarqueur(ligne, ",");
+			Intervalle I1 = new Intervalle(s1);
+			Intervalle I2 = new Intervalle(s2);
+			if (I1.contient(I2) || I2.contient(I1)) 
+			{
+				NbLigne++;
+			}
+		}
+		return NbLigne;
+	}
+
 	public static class Intervalle
 	{
 		int debut, fin;

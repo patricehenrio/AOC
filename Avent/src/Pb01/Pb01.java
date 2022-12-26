@@ -2,34 +2,31 @@ package Pb01;
 
 import java.io.IOException;
 
-import fichiers.Fichiers;
+import AOC.AOC;
 
-public class Pb01 
+public class Pb01 extends AOC
 {
-	static String repertoire = "F:\\AOC\\calendrier avent\\";
-
+	static String[] elfes;
 	public static void main(String[] args) throws IOException 
 	{
-		String fichier = repertoire + "pb 01.txt";
-		String donnees = Fichiers.chargerContenuTexte(fichier);
-		String[] elfes = donnees.split("\n\n");
-		int calorie, max1 = 0, max2 = 0, max3 = 0;
-//      //première partie
-//		for(int i = 0; i < elfes.length; i++)
-//		{
-//			calorie = 0;
-//			String[] lignes = elfes[i].split("\n");
-//			for (String ligne : lignes)
-//			{
-//				calorie += Integer.parseInt(ligne);
-//				if (calorie > max) max = calorie;
-//			}
-//		}
+		String donnees = chargerDonnees("pb 01.txt");
+		
+		elfes = donnees.split("\n\n");
+		
+		//première partie
+		System.out.println(partie_1());
+
 		//Deuxième partie
+		System.out.println(partie_2());
+	}
+
+	private static String partie_2() 
+	{
+		int max1 = 0, max2 = 0, max3 = 0;
 		
 		for(int i = 0; i < elfes.length; i++)
 		{
-			calorie = 0;
+			int calorie = 0;
 			String[] lignes = elfes[i].split("\n");
 			for (String ligne : lignes) calorie += Integer.parseInt(ligne);
 			if (calorie < max3) continue;
@@ -50,7 +47,23 @@ public class Pb01
 			}
 		}
 		
-		System.out.println(max1 + max2 + max3);
+		return "partie 2 : " + (max1 + max2 + max3);
+	}
+
+	private static String partie_1() 
+	{
+		int max = 0;
+ 		for(int i = 0; i < elfes.length; i++)
+		{
+			int calorie = 0;
+			String[] lignes = elfes[i].split("\n");
+			for (String ligne : lignes)
+			{
+				calorie += Integer.parseInt(ligne);
+				if (calorie > max) max = calorie;
+			}
+		}
+		return "partie 1 : " + max;
 	}
 
 }

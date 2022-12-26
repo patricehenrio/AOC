@@ -5,24 +5,21 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.TreeSet;
 
+import AOC.AOC;
 import debug.Messages;
-import fichiers.Fichiers;
 
-public class Pb07 
+public class Pb07 extends AOC
 {
-	static String repertoire = "F:\\AOC\\calendrier avent\\";
 	static HashMap <String, Integer> arborescence = new HashMap <String, Integer>();
 	static HashMap <String, Integer> arborescenceTotale = new HashMap<String, Integer>();
 	static String repertoireCourant = "";
-	static int part = 2;
 	static TreeSet<String> rep = new TreeSet<String>(new Comparateur());
 
 	
 	
 	public static void main(String[] args) throws IOException 
 	{
-		String fichier = repertoire + "pb 07.txt";
-		String donnees = Fichiers.chargerContenuTexte(fichier);
+		String donnees = chargerDonnees("pb 07.txt");
 		//données test
 //		donnees = "$ cd /\n"
 //				+ "$ ls\n"
@@ -53,7 +50,6 @@ public class Pb07
 		for(int i = 0; i < lignes.length; i++)
 		{
 			String ligne = lignes[i];
-//			System.out.println(ligne);
 			char c = ligne.charAt(0);
 			if (c=='$') traiterLigneCommande(ligne);
 			else 
@@ -77,15 +73,11 @@ public class Pb07
 				String t = s.substring(0,n);
 				int m = arborescenceTotale.get(t);
 				arborescenceTotale.put(t, m + arborescenceTotale.get(s));
-//				System.out.println(s + " ---> " + arborescenceTotale.get(s));
-//				System.out.println(t + " ---> " + arborescenceTotale.get(t));
-//				System.out.println("*************************************");
 			}
 		}
-
 		
-		if (part == 1) traiter1();
-		else traiter2();
+		traiter1();
+		traiter2();
 	}
 
 
@@ -107,7 +99,6 @@ public class Pb07
 		
 		for(String s : rep)
 		{
-//			System.out.println(s + " ---> " + arborescenceTotale.get(s));
 			int n = arborescenceTotale.get(s);
 			if (n < man) continue;
 			if (n < tot)  tot = n;
