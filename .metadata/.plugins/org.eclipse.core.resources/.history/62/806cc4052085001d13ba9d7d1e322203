@@ -1,0 +1,16 @@
+package Pb13;
+
+import java.io.IOException;
+
+import AOC.AOC;
+
+public class Pb13 extends AOC 
+{
+
+	public static void main(String[] args) throws IOException 
+	{
+		String donnees = chargerDonnees("pb 13.txt");
+
+	}
+
+}

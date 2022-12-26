@@ -1,0 +1,14 @@
+package Pb13;
+
+import AOC.AOC;
+
+public class Pb13 extends AOC 
+{
+
+	public static void main(String[] args) 
+	{
+		String donnees = chargerDonnees("pb 13.txt");
+
+	}
+
+}

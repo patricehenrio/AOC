@@ -1,0 +1,12 @@
+package Pb12;
+
+import AOC.AOC;
+
+public class Pb12 extends AOC {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

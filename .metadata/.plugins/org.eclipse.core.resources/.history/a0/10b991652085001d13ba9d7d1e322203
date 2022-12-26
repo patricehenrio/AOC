@@ -1,0 +1,41 @@
+package Pb13;
+
+import java.io.IOException;
+
+import AOC.AOC;
+import Pb13.Pb13_1.Paquet;
+
+public class Pb13 extends AOC 
+{
+
+	public static void main(String[] args) throws IOException 
+	{
+		String donnees = chargerDonnees("pb 13.txt");
+
+	}
+
+	static class Paire
+	{
+		Paquet left, right;
+		boolean bonOrdre = true;
+		
+		public Paire(String s) 
+		{
+			String[] paire = s.split("\n");
+			left = new Paquet(paire[0]);
+			right = new Paquet(paire[1]);
+			bonOrdre = (left.compareTo(right) < 0); 
+		}
+
+		public boolean isBonOrdre() 
+		{
+			return bonOrdre;
+		}
+		
+		public String toString()
+		{
+			return left + "\n" + right;
+		}
+	}
+	
+}

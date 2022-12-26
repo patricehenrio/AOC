@@ -1,0 +1,84 @@
+package Pb13;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import AOC.AOC;
+import Pb13.Pb13_1.Paire;
+import Pb13.Pb13_1.Paquet;
+
+public class Pb13 extends AOC 
+{
+
+	public static void main(String[] args) throws IOException 
+	{
+		//première partie
+		System.out.println(partie_1());
+		//Deuxième partie
+		System.out.println(partie_2());
+		
+
+	}
+
+	private static int partie_2() throws IOException 
+	{
+		String donnees = chargerDonnees("pb 13.txt");
+		List<Paire> lesPaires = new ArrayList<Paire>();
+		for(String s : donnees.split("\n\n")) 
+		{
+			lesPaires.add(new Paire(s));
+		}
+		
+		int total = 0;
+		for(int i = 0; i < lesPaires.size(); i++)
+		{
+			Paire paire = lesPaires.get(i);
+			if (paire.isBonOrdre()) total += (i+1);
+		}
+		return total;
+	}
+
+	private static int partie_1() throws IOException 
+	{
+		String donnees = chargerDonnees("pb 13.txt");
+		List<Paire> lesPaires = new ArrayList<Paire>();
+		for(String s : donnees.split("\n\n")) 
+		{
+			lesPaires.add(new Paire(s));
+		}
+		
+		int total = 0;
+		for(int i = 0; i < lesPaires.size(); i++)
+		{
+			Paire paire = lesPaires.get(i);
+			if (paire.isBonOrdre()) total += (i+1);
+		}
+		return total;
+	}
+
+	static class Paire
+	{
+		Paquet left, right;
+		boolean bonOrdre = true;
+		
+		public Paire(String s) 
+		{
+			String[] paire = s.split("\n");
+			left = new Paquet(paire[0]);
+			right = new Paquet(paire[1]);
+			bonOrdre = (left.compareTo(right) < 0); 
+		}
+
+		public boolean isBonOrdre() 
+		{
+			return bonOrdre;
+		}
+		
+		public String toString()
+		{
+			return left + "\n" + right;
+		}
+	}
+	
+}
