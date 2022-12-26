@@ -1,0 +1,15 @@
+1670345241681	Delete element
+1670345341415	Delete element
+1670501632446	Rename type 'Pb08_01'
+1670577030654	Rename field 'maxr'
+1670577039973	Rename field 'minr'
+1670577050621	Rename field 'maxu'
+1670577062950	Rename field 'minu'
+1670579012438	Rename method 'traiter1'
+1670666714315	Rename local variable 'j'
+1670666725812	Rename local variable 'i'
+1670694937399	Rename field 'tick'
+1670746682213	Copy package
+1670746692748	Delete element
+1670746706256	Copy compilation unit
+1670749495136	Rename field 'items'

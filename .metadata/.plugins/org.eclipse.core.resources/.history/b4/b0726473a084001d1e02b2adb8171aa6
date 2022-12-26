@@ -1,0 +1,61 @@
+package Pb09;
+
+import java.awt.Point;
+import java.io.IOException;
+
+import AOC.AOC;
+
+public class Pb09 extends AOC 
+{
+	static char[][] deplacements;
+	//les données ci-dessous ont été déterminées empiriquement
+	static int xDepart = 200, yDepart = 200;
+	static int nbLignes = 500, nbColonnes = 500;
+	
+	static Point T, H;
+	private static String[] mouvements;
+
+	public static void main(String[] args) throws IOException 
+	{
+		String donnees = chargerDonnees("pb 09.txt");
+		
+		//test
+		//donnees = "R 4\nU 4\nL 3\nD 1\nR 4\nD 1\nL 5\nR 2";
+		
+		mouvements = donnees.split("\n");
+		//dimensions et point de départ déterminés empiriquement par programme 
+		deplacements = new char[nbLignes][nbColonnes];
+		
+		T = new Point(xDepart,yDepart);
+		H = new Point(xDepart,yDepart);
+
+		//première partie
+		System.out.println(partie_1());
+		
+		//Deuxième partie
+		System.out.println(partie_2());
+		
+	}
+
+	private static char[] partie_2() 
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private static char[] partie_1() 
+	{
+		for(String s :mouvements)
+		{
+//			System.out.println(s);
+			traiter(s);
+//			System.out.println("H " + H);
+//			System.out.println("T " + T);
+//			deplacements[0][0] = 's';
+//			deplacements[T.x][T.y] = '#';
+//			afficher();
+		}
+		return null;
+	}
+
+}

@@ -1,0 +1,168 @@
+package Pb10;
+
+import java.io.IOException;
+
+import javax.swing.JOptionPane;
+
+import AOC.AOC;
+
+public class PB10 extends AOC 
+{
+
+	private static String[] instructions;
+	private static int cycle;
+	private static int X = 1;
+
+	private static int ligneCourante;
+	private static String row = "";
+	private static String[] lignes = new String[7];
+	static String ecran = "###" + ".".repeat(237);
+			
+	public static void main(String[] args) throws IOException 
+	{
+		String donnees = chargerDonnees("pb 10.txt");
+		instructions = donnees.split("\n");
+		//première partie
+		System.out.println(partie_1());
+		//Deuxième partie
+		System.out.println(partie_2());
+	}
+
+	private static String partie_2() 
+	{
+		String[] lignes = new String[7];
+		
+		for(String s : instructions)
+		{
+			traiter2(s);
+		}
+		
+		for(int i = 0; i < 7; i++)
+		{
+			System.out.println(lignes [i]);
+		}
+
+	    String nom = JOptionPane.showInputDialog(null, "Que lisez-vous dans la console !", "Advent of code, jour 10 !", JOptionPane.QUESTION_MESSAGE);
+		return nom;
+	}
+
+	private static void traiter2(String s) 
+	{
+		if (s.startsWith("addx")) traiterAddx(s);
+		else traiterNoop(s);
+	}
+
+	private static void traiterNoop(String s) 
+	{
+		cycle++;
+		if ((cycle-1)%40 == 0)
+		{
+			lignes[ligneCourante] = row;
+			ligneCourante++;
+			row = "";
+		}
+		
+//		String start = "Start cycle ";
+//		String espace = "";
+//		if (cycle < 10) espace = "  ";
+//		else if (cycle < 100) espace = " ";
+//		start += espace + cycle + ": begin executing " + s;
+//		System.out.println(start);
+//		
+//		String during = "During cycle" + espace + cycle + ": CRT draws pixel in position " + (cycle - 1);
+//		System.out.println(during);
+		
+		row += ecran.charAt((cycle-1)%40);
+		String current = "Current CRT row: " + row;
+		System.out.println(current);
+//		
+//		String endCycle = "End od cycle" + espace + cycle + ":" + " finish Executing " + s + "\n";
+//		System.out.println(endCycle);
+//		
+		if (cycle == 240) lignes[ligneCourante] = row;
+	}
+
+	private static void traiterAddx(String s) 
+	{
+		cycle++;
+		if ((cycle-1)%40 == 0)
+		{
+			lignes[ligneCourante] = row;
+			ligneCourante++;
+			row = "";
+		}
+
+		String start = "Start cycle ";
+		String espace = "";
+		if (cycle < 10) espace = "  ";
+		else if (cycle < 100) espace = " ";
+		start += espace + cycle + ": begin executing " + s;
+//		System.out.println(start);
+
+		String during = "During cycle" + espace + cycle + ": CRT draws pixel in position " + (cycle - 1);
+//		System.out.println(during);
+		
+		row += ecran.charAt((cycle-1) % 40);
+		String current = "Current CRT row: " + row;
+//		System.out.println(current);
+		
+		cycle++;
+		if ((cycle-1)%40 == 0)
+		{
+			lignes[ligneCourante] = row;
+			ligneCourante++;
+			row = "";
+		}
+
+//		System.out.println("");
+		during = "During cycle" + espace + cycle + ": CRT draws pixel in position " + (cycle - 1);
+//		System.out.println(during);
+		
+		row += ecran.charAt((cycle-1) % 40);
+		current = "Current CRT row: " + row;
+//		System.out.println(current);
+		
+		X += Integer.parseInt(s.substring(5));
+		String endCycle = "End od cycle" + espace + cycle + ":" + " finish Executing " + s + " (Register X is now " + X + ")";
+//		System.out.println(endCycle);
+		
+		if (X == -1) ecran = "##" + ".".repeat(238);
+		else if (X == 0) ecran = "###" + ".".repeat(237);
+		else ecran = ".".repeat(X-1) + "###" + ".".repeat(238-X);
+//		afficherSpritePosition();
+	}
+
+	private static int partie_1() 
+	{
+		int[] Xresultat = {1 , 0};
+//		int X = 1;
+//		int resultat = 0;
+		cycle = 0;
+		for(String s : instructions)
+		{
+			Xresultat = traiter1(s, Xresultat);
+			if (cycle > 220) break;
+		}
+		return Xresultat[1];
+	}
+
+	private static int[] traiter1(String s, int[] Xresultat) 
+	{
+		cycle ++;
+		if (cycle % 40 == 20)
+		{
+			Xresultat[1] += Xresultat[0]*cycle;	
+		}
+		if (s.startsWith("addx "))
+		{
+			cycle++;
+			if (cycle % 40 == 20) Xresultat[1] += Xresultat[0]*cycle;	
+			Xresultat[0] += Integer.parseInt(s.substring(5));
+			return Xresultat;
+		}
+		if (s.equals("noop")) return Xresultat;
+		else throw new RuntimeException("opération non valide : " + s);
+	}
+
+
+}

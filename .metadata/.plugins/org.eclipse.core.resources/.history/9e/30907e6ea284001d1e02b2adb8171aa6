@@ -1,0 +1,193 @@
+package Pb09;
+
+import java.awt.Point;
+import java.io.IOException;
+
+import AOC.AOC;
+
+public class Pb09 extends AOC 
+{
+	static char[][] deplacements;
+	//les données ci-dessous ont été déterminées empiriquement
+	static int xDepart = 200, yDepart = 200;
+	static int nbLignes = 500, nbColonnes = 500;
+	
+	static Point T, H;
+	private static String[] mouvements;
+
+	public static void main(String[] args) throws IOException 
+	{
+		String donnees = chargerDonnees("pb 09.txt");
+		
+		//test
+		//donnees = "R 4\nU 4\nL 3\nD 1\nR 4\nD 1\nL 5\nR 2";
+		
+		mouvements = donnees.split("\n");
+		//dimensions et point de départ déterminés empiriquement par programme 
+		deplacements = new char[nbLignes][nbColonnes];
+		
+		T = new Point(xDepart,yDepart);
+		H = new Point(xDepart,yDepart);
+
+		//première partie
+		System.out.println(partie_1());
+		
+		//Deuxième partie
+		System.out.println(partie_2());
+		
+	}
+
+	private static String partie_2() 
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private static int partie_1() 
+	{
+		for(String s :mouvements)
+		{
+			traiter1(s);
+		}
+		int resultat = 0;
+		for(int i = 0; i < nbLignes; i++)
+			for(int j = 0; j < nbColonnes; j++)
+				if (deplacements[i][j] != 0) resultat++;
+		return resultat;
+	}
+
+	private static void traiter1(String s)
+	{
+		char c = s.charAt(0);
+		int n = Integer.parseInt(s.substring(2));
+		
+		while(n > 0)
+		{
+			switch(c)
+			{
+				case 'U' : //up
+					H = new Point(H.x, H.y+1);
+					break;
+				case 'D' : //down
+					H = new Point(H.x, H.y-1);
+					break;
+				case 'R' : //right
+					H = new Point(H.x+1, H.y);
+					break;
+				case 'L' : //left
+					H = new Point(H.x-1, H.y);
+					break;
+				default : 
+					System.out.println("erreur sur cette ligne : " + s);
+			}
+			n--;
+			deplacerQueue();
+		}
+
+	}
+
+	private static void deplacerQueue() 
+	{
+		if (T.x == H.x)//même colonne
+		{
+			if(Math.abs(T.y - H.y) < 2) return;
+			if (T.y == H.y-2)
+			{
+				T = new Point(T.x, T.y+1);
+				deplacements[T.x][T.y]='#';
+				return;
+			}
+			if (T.y == H.y +2)
+			{
+				T = new Point(T.x, T.y-1);
+				deplacements[T.x][T.y]='#';
+				return;
+			}
+			throw new RuntimeException("Erreur de déplacement");	
+		}
+		
+		if (T.x == H.x + 1)//T à gauche de H
+		{
+			if(Math.abs(T.y - H.y) < 2) return;
+			if (T.y == H.y-2)
+			{
+				T = new Point(T.x-1, T.y+1);
+				deplacements[T.x][T.y]='#';
+				return;
+			}
+			if (T.y == H.y +2)
+			{
+				T = new Point(T.x-1, T.y-1);
+				deplacements[T.x][T.y]='#';
+				return;
+			}
+			throw new RuntimeException("Erreur de déplacement");	
+		}
+		
+		if (T.x == H.x - 1)//une lmigne au dessous
+		{
+			if(Math.abs(T.y - H.y) < 2) return;
+			if (T.y == H.y-2)
+			{
+				T = new Point(T.x+1, T.y+1);
+				deplacements[T.x][T.y]='#';
+				return;
+			}
+			if (T.y == H.y +2)
+			{
+				T = new Point(T.x+1, T.y-1);
+				deplacements[T.x][T.y]='#';
+				return;
+			}
+			throw new RuntimeException("Erreur de déplacement");	
+		}
+		
+		if (T.x == H.x + 2)//une ligne au dessus
+		{
+			if (T.y == H.y)
+			{
+				T = new Point(T.x-1, T.y);
+				deplacements[T.x][T.y]='#';
+				return;
+			}
+			if (T.y == H.y-1)
+			{
+				T = new Point(T.x-1, T.y+1);
+				deplacements[T.x][T.y]='#';
+				return;
+			}
+			if (T.y == H.y+1)
+			{
+				T = new Point(T.x-1, T.y-1);
+				deplacements[T.x][T.y]='#';
+				return;
+			}
+			throw new RuntimeException("Erreur de déplacement");	
+		}
+		
+		if (T.x == H.x - 2)//la queue (Tail) est deux colonnes à gauche de la tête (H)
+		{
+			if (T.y == H.y)
+			{
+				T = new Point(T.x+1, T.y);
+				deplacements[T.x][T.y]='#';
+				return;
+			}
+			if (T.y == H.y-1)
+			{
+				T = new Point(T.x+1, T.y+1);
+				deplacements[T.x][T.y]='#';
+				return;
+			}
+			if (T.y == H.y+1)
+			{
+				T = new Point(T.x+1, T.y-1);
+				deplacements[T.x][T.y]='#';
+				return;
+			}
+			throw new RuntimeException("Erreur de déplacement");	
+		}
+		
+		throw new RuntimeException("Erreur de déplacement");
+	}
+}
