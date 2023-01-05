@@ -1,7 +1,0 @@
-package Pb02;
-
-import AOC.AOC;
-
-public class Pb02test extends AOC {
-
-}

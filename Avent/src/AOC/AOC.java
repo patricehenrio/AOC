@@ -1,7 +1,5 @@
 package AOC;
 
-import static AOC.AOC.repertoire;
-
 import java.io.IOException;
 
 import fichiers.Fichiers;

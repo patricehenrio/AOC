@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="."/>
+		<item key="selection" value="\n"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="\r\n"/>
+			<item value="KI"/>
+			<item value="VI"/>
 			<item value=" ."/>
 			<item value="Elfe"/>
 			<item value=" ,"/>
 			<item value="( "/>
-			<item value="\r\n"/>
 			<item value="Sprite position"/>
 			<item value="covers"/>
 			<item value="to"/>
@@ -21,16 +23,14 @@
 			<item value="rocher"/>
 			<item value="\r"/>
 			<item value="row"/>
-			<item value="input.txt"/>
-			<item value="##..##..##..##..##..##..##..##..##..##.."/>
 		</list>
 		<list key="replacehistory">
+			<item value="\n"/>
 			<item value="."/>
 			<item value="elfe"/>
 			<item value=""/>
 			<item value=","/>
 			<item value="("/>
-			<item value="\n"/>
 			<item value="position motif "/>
 			<item value="recouvre"/>
 			<item value="à"/>
@@ -43,8 +43,8 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="684"/>
-		<item key="DIALOG_Y_ORIGIN" value="437"/>
+		<item key="DIALOG_X_ORIGIN" value="1325"/>
+		<item key="DIALOG_Y_ORIGIN" value="139"/>
 		<item key="DIALOG_WIDTH" value="322"/>
 		<item key="DIALOG_HEIGHT" value="391"/>
 		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
