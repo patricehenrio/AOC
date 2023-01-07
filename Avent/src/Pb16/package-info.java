@@ -241,4 +241,6 @@ Valves BB, CC, DD, EE, HH, and JJ are open, releasing 81 pressure.
 Avec l'aide de l'éléphant, après 26 minutes, le mieux que vous puissiez faire relâcherait une pression totale de 1707.
 
 Avec vous et un éléphant travaillant ensemble pendant 26 minutes, quelle est la pression maximale que vous pourriez relâcher ?
+
+Votre réponse au puzzle était 2304.
 */
