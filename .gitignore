@@ -1,2 +1,13 @@
 
 *.metadata/
+.metadata/.log
+*.index
+.metadata/.plugins/org.eclipse.core.resources/.projects/Avent/.markers
+*.resources
+*.xml
+*.xmi
+*.index
+*.png
+*.history
+*.log
+*.ini
