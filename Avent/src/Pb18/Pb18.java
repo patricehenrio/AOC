@@ -165,6 +165,9 @@ public class Pb18 extends AOC
 			}
 		}
 
+		//Pour savoir si une face doit être comptée ou non il y a deux méthodes
+		//Compter toutes les faces (solution du 1) et retirer celles qui sont en
+		//contact avec une cavité (Etat.VIDE)
 		for(int x = minX; x <= maxX; x++)
 		{
 			for(int y = minY; y <= maxY; y++)
@@ -184,7 +187,45 @@ public class Pb18 extends AOC
 				}
 			}
 		}
+
+		//autre méthode
+		//Pour chaque cube compter les faces en contact avec l'extérieur
+		//C'était ma première idée mais je ne trouvais pas la bonne réponse
+		//En fait je faisais l'erreur de traiter dans un  seul if les faces correspondant au minimum 
+		//et au maximum des coordonnées. Mainetnant j'ai bien une seule réponse.
+		int nbFacesExt = 0;
+		for(int x = minX; x <= maxX; x++)
+		{
+			for(int y = minY; y <= maxY; y++)
+			{
+				for(int z = minZ; z <= maxZ; z++)
+				{
+					Cube c = new Cube(x,y,z);
+					if (goutelette.get(c) == Etat.PLEIN)
+					{
+						if (x == minX) nbFacesExt++;
+						else if(goutelette.get(c.getXmoins1()) == Etat.EXT) nbFacesExt++;
+						if (x == maxX) nbFacesExt++;
+						else if(goutelette.get(c.getXplus1()) == Etat.EXT) nbFacesExt++;
+						
+						if (y == minY) nbFacesExt++;
+						else if(goutelette.get(c.getYmoins1()) == Etat.EXT) nbFacesExt++;
+						if (y == maxY) nbFacesExt++;
+						else if(goutelette.get(c.getYplus1()) == Etat.EXT) nbFacesExt++;
+
+						if (z == minZ) nbFacesExt++;
+						else if(goutelette.get(c.getZmoins1()) == Etat.EXT) nbFacesExt++;
+						if (z == maxZ) nbFacesExt++;
+						else if(goutelette.get(c.getZplus1()) == Etat.EXT) nbFacesExt++;
+					}
+				}
+			}
+		}
+
+		System.out.println(nbFacesExt);
 		return nbFacesVisibles;
+		
+		
 	}
 
 	private static boolean isExterieur(HashMap<Cube, Etat> goutelette, Cube c) 
